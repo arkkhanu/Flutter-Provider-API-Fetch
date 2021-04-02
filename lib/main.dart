@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_api_fetch_provider/Screens/Dashboard1_Screen.dart';
 import 'package:flutter_api_fetch_provider/Screens/Dashboard2_Screen.dart';
 import 'package:flutter_api_fetch_provider/Screens/Login_Screen.dart';
+import 'package:flutter_api_fetch_provider/Screens/TabScreen.dart';
 import 'package:flutter_api_fetch_provider/Services/Routes_Names.dart';
 import 'package:flutter_api_fetch_provider/Services/Todo_Provider.dart';
 import 'package:provider/provider.dart';
@@ -26,6 +27,7 @@ class MyApp extends StatelessWidget {
         Routes_Names.Login_Screen : (context) => Login_Screen(),
         Routes_Names.Dashboard1_Screen : (context) => Dashboard1_Screen(),
         Routes_Names.Dashboard2_Screen : (context) => Dashboard2_Screen(),
+        Routes_Names.TabScreen_Screen : (context) => TabScreen(),
       },
       home: Login_Screen(),
     ),);

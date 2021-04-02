@@ -5,43 +5,15 @@ import 'package:flutter_api_fetch_provider/Services/API_Fetch.dart';
 import 'package:flutter_api_fetch_provider/Services/TodoModal.dart';
 
 class Todo_Provider with ChangeNotifier {
-  /*TodoModal _todoModal;
 
-  TodoModal get getTodoModal => _todoModal;
+  bool _isLoading = false;
 
-  Future<TodoModal> getTodoFromNetwork() async {
-    _todoModal = null;
-    String response;
-    response = await API_Fetch.fetchSingleTodo();
-    print("get");
-    if (response != null) {
-      if (response != "NetworkError" && response != "SocketError" && response != "null") {
-        */ /*Iterable l = jsonDecode(response);
-        var asd = List<TodoModal>.from(l.map((e) => TodoModal.fromJson(e)));*/ /*
-       TodoModal _tempTodo = TodoModal.fromJson(jsonDecode(response));
-       _tempTodo != null ? _todoModal = _tempTodo : _todoModal = null;
-       print("response :"+_todoModal.title);
-       return _todoModal;
-      }
-      else {
-        if (response == "NetworkError") {
-          print("NetWork Error");
-          return null;
-        }
-        else {
-          print("Socket Error");
-          return null;
-        }
-      }
-    }
-    return _todoModal;
-  }
+  bool get getIsLoading => _isLoading;
 
-  Future<void> setTodoFromNetwork() async {
-    await getTodoFromNetwork();
-    print("Set");
+  void setIsLoading(bool _val){
+    _isLoading = _val;
     notifyListeners();
-  }*/
+  }
 
   TodoModal _todoModal;
 
@@ -59,9 +31,6 @@ class Todo_Provider with ChangeNotifier {
       if (response != "NetworkError" &&
           response != "SocketError" &&
           response != "null") {
-        // print("response:"+jsonDecode(response).toString());
-        // Iterable l = jsonDecode(response);
-        // _ = List<TodoModal>.from(l.map((e) => TodoModal.fromJson(e)));
         _ = List<TodoModal>.from(jsonDecode(response).map((e) => TodoModal.fromJson(e)));
         print("---Length:" + _.length.toString());
         return _ != null ? _ : null;
@@ -89,12 +58,16 @@ class Todo_Provider with ChangeNotifier {
   setListTodoFromNetWork() async {
     print("set");
     _todoModalList = [];
+    _isLoading = true;
     List<TodoModal> _ = await getTodoListFromNetWork();
+    _isLoading = false;
     if (_ != null) {
+      // _isLoading = false;
       _todoModalList = _;
       print("if-Set1" + _.toString());
       notifyListeners();
     } else {
+      // _isLoading = false;
       _todoModalList = [];
       print("else-Set1" + _.toString());
       notifyListeners();
@@ -116,8 +89,17 @@ class Todo_Provider with ChangeNotifier {
     }
   }
 
+
+
+
+ /* setSearchTodoList(List<TodoModal> _list){
+    _todoModalList = _list;
+    notifyListeners();
+  }*/
+
   void disposeing() {
     _todoModal = null;
     _todoModalList = [];
+    _isLoading = false;
   }
 }

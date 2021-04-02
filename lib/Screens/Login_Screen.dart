@@ -27,6 +27,11 @@ class _Login_ScreenState extends State<Login_Screen> {
               Navigator.pushNamed(context, Routes_Names.Dashboard2_Screen);
             },),
           ),
+          Center(
+            child: ElevatedButton(child: Text("TabScreen In"),onPressed: (){
+              Navigator.pushNamed(context, Routes_Names.TabScreen_Screen);
+            },),
+          ),
         ],
       ), 
     ));
